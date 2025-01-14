@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión Agronómica</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="text-center mb-4">Gestión Agronómica</h1>
+
+    <!-- Menú de navegación -->
+    <ul class="nav nav-tabs mb-4" id="mainTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="actividades-tab" data-bs-toggle="tab" data-bs-target="#actividades" type="button" role="tab" aria-controls="actividades" aria-selected="true">
+          Actividades
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="parcelas-tab" data-bs-toggle="tab" data-bs-target="#parcelas" type="button" role="tab" aria-controls="parcelas" aria-selected="false">
+          Parcelas
+        </button>
+      </li>
+    </ul>
+
+    <!-- Contenido del menú -->
+    <div class="tab-content" id="mainTabsContent">
+      <!-- Actividades -->
+      <div class="tab-pane fade show active" id="actividades" role="tabpanel" aria-labelledby="actividades-tab">
+        <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#activityModal" onclick="openAddModal()">Agregar Actividad</button>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Tipo</th>
+              <th>Insumos</th>
+              <th>Duración (horas)</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="activityTable"></tbody>
+        </table>
+      </div>
+
+      <!-- Parcelas -->
+      <div class="tab-pane fade" id="parcelas" role="tabpanel" aria-labelledby="parcelas-tab">
+        <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#parcelModal" onclick="openAddParcelModal()">Agregar Parcela</button>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Ubicación</th>
+              <th>Tamaño (ha)</th>
+              <th>Cultivo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="parcelTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Actividades -->
+  <div class="modal fade" id="activityModal" tabindex="-1" aria-labelledby="activityModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="activityModalLabel">Agregar Actividad</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="activityForm">
+            <input type="hidden" id="activityId">
+            <div class="mb-3">
+              <label for="fecha" class="form-label">Fecha</label>
+              <input type="date" id="fecha" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="tipo" class="form-label">Tipo de Actividad</label>
+              <input type="text" id="tipo" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="insumos" class="form-label">Insumos</label>
+              <input type="text" id="insumos" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="duracion" class="form-label">Duración (horas)</label>
+              <input type="number" id="duracion" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Parcelas -->
+  <div class="modal fade" id="parcelModal" tabindex="-1" aria-labelledby="parcelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="parcelModalLabel">Agregar Parcela</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="parcelForm">
+            <input type="hidden" id="parcelId">
+            <div class="mb-3">
+              <label for="ubicacion" class="form-label">Ubicación</label>
+              <input type="text" id="ubicacion" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="tamano" class="form-label">Tamaño (ha)</label>
+              <input type="number" id="tamano" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="cultivo" class="form-label">Cultivo</label>
+              <input type="text" id="cultivo" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+services:
+  frontend:
+    build:
+      context: ./FrontEnd
+    ports:
+      - "8080:8080"
+
+  backend:
+    build:
+      context: ./BackEnd
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_NAME=agronomico
+      - DB_PORT=3306 # Puerto actualizado
+    networks:
+      - backend_network  # Aquí también debe estar la misma red
+    command: ["./wait-for-it.sh", "db:3306", "--", "npm", "start"]
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: agronomico
+    ports:
+      - "3307:3306"  # Puerto de la base de datos expuesto
+    networks:
+      - backend_network
+
+networks:
+  backend_network:
+    driver: bridge
